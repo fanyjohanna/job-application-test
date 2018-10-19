@@ -11,9 +11,6 @@ class PDFController extends Controller
 {
     public function generatePDF()
     {
-        if(!Auth::user()){
-            return redirect('home');
-        }
         $students = Student::orderBy('student_name')->get();
         $pdf=PDF::loadView('document', compact('students'))->setPaper('a4');
         return $pdf->download('management_class.pdf');
